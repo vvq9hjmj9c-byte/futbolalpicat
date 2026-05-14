@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscripció CA Alpicat</title>
+    <link rel="stylesheet" href="estil.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .caixa-dades {
+            display: flex !important;
+            flex-direction: column !important;
+            padding: 40px !important;
+        }
+
+        .fila-inputs {
+            display: flex !important;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .boto-pro {
+            width: 100% !important;
+            height: auto !important;
+            aspect-ratio: auto !important;
+            padding: 15px !important;
+            border-radius: 50px !important;
+            background: black !important;
+            color: white !important;
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+        }
+
+        #calendari-pro {
+            cursor: pointer;
+            background-color: white !important;
+        }
+    </style>
+</head>
+
+<body class="pagina-formulari">
+    <div class="wrapper-formulari">
+        <div class="caixa-foto">
+            <div class="overlay-text">
+                <h2>UNEIX-TE A LA NOSTRA HISTÒRIA</h2>
+                <p>Temporada 2026/27</p>
+            </div>
+        </div>
+
+        <div class="caixa-dades">
+            <div class="logo-mini">
+                <img src="escut-alpicat.png" alt="Logo" style="width: 50px;">
+            </div>
+            <h3>INSCRIPCIÓ ONLINE</h3>
+            
+            <form id="meuForm" action="https://formspree.io/f/xlgaegvn" method="POST">
+                <div class="input-group">
+                    <label>NOM COMPLET</label>
+                    <input type="text" name="nom" placeholder="Escriu el teu nom..." required>
+                </div>
+
+                <div class="fila-inputs">
+                    <div class="input-group">
+                        <label>DATA DE NAIXEMENT</label>
+                        <input type="text" name="data_naixement" id="data-manual" placeholder="DD/MM/AAAA" maxlength="10" required>
+                        <small style="color: #888; font-size: 11px; margin-top: 5px;">Format: Dia/Mes/Any</small>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>POSICIÓ</label>
+                        <select name="posicio" required>
+                            <option value="" disabled selected>Tria...</option>
+                            <option>Portera</option>
+                            <option>Central</option>
+                            <option>Lateral</option>
+                            <option>Interior</option>
+                            <option>Extrem</option>
+                            <option>Punta</option>
+                        </select>
+                    </div>
+                </div>
+
+                <script>
+                    const inputData = document.getElementById('data-manual');
+
+                    inputData.addEventListener('input', function(e) {
+                        let v = e.target.value.replace(/\D/g, '').slice(0, 8);
+                        if (v.length >= 2 && v.length < 4) {
+                            v = v.slice(0, 2) + '/' + v.slice(2);
+                        } else if (v.length >= 4) {
+                            v = v.slice(0, 2) + '/' + v.slice(2, 4) + '/' + v.slice(4);
+                        }
+                        e.target.value = v;
+                    });
+
+                    document.getElementById('meuForm').addEventListener('submit', function(e) {
+                        const regexData = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
+                        if (!regexData.test(inputData.value)) {
+                            alert("Per favor, introdueix una data vàlida (DD/MM/AAAA)");
+                            e.preventDefault();
+                        }
+                    });
+                </script>
+
+                <button type="submit" class="boto-pro">ENVIAR SOL·LICITUD</button>
+            </form>
+            
+            <a href="reportatgetesi.html" class="link-tornar" style="text-align: center; display: block; margin-top: 20px; color: #cc0000; text-decoration: none; font-weight: bold;">← Tornar a la web principal</a>
+        </div>
+    </div>
+</body>
+</html>
